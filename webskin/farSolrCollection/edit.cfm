@@ -1,5 +1,6 @@
 <cfsetting enablecfoutputonly="true" />
 
+<!--- import tag libraries --->
 <cfimport prefix="ft" taglib="/farcry/core/tags/formtools" />
 
 <!-------------------------------
@@ -41,7 +42,7 @@ ACTION:
 
 <ft:processform action="Save">
 	<!--- update primary content item --->
-	<ft:processformobjects typename="#URL.Typename#" />
+	<ft:processformobjects typename="#url.typename#" />
 
 	<!--- synchronise the settings for other members of lhosts --->
 	<cfif len(application.stplugins.farcrysolr.lhosts)>
@@ -61,7 +62,7 @@ ACTION:
 			<cfset stUpdate.hostname=stConfig.hostname />
 			<cfset stUpdate.collectionpath=stConfig.collectionpath />
 			<!--- <cfset stUpdate.builttodate=stConfig.builttodate /> --->
-			<cfset setData(objectid=qConfigs.objectid, stproperties=stUpdate) />
+			<cfset setData(objectid=qConfigs.objectid, stprops=stUpdate) />
 		</cfloop>
 	</cfif>
 
@@ -79,10 +80,10 @@ VIEW:
 	<!--- only show index options if typename selected --->
 	<ft:object legend="Configuration Options" lfields="title,indexTitle,lIndexProperties" stobject="#stObj#" format="edit" intable="false" />
 
-	<ft:farcryButtonPanel indentForLabel="false">
+	<ft:buttonPanel indentForLabel="false">
 		<ft:button value="Save" />
-		<ft:button value="Cancel" />
-	</ft:farcryButtonPanel>
+		<ft:button value="Cancel" validate="false" />
+	</ft:buttonPanel>
 
 	<cfswitch expression="#stobj.collectiontype#">
 		<cfcase value="file">
@@ -101,18 +102,19 @@ VIEW:
 	<ft:object legend="Operational Options" lfields="bEnableSearch,builttodate,collectionname,collectionpath,hostname" stobject="#stObj#" format="edit" intable="false" />
 	<ft:object legend="Debug Options Only" lfields="collectiontype,collectiontypename" stobject="#stObj#" format="edit" intable="false" />
 
-	<ft:farcryButtonPanel indentForLabel="false">
+	<ft:buttonPanel indentForLabel="false">
 		<ft:button value="Save" />
-		<ft:button value="Cancel" />
-	</ft:farcryButtonPanel>
+		<ft:button value="Cancel" validate="false" />
+	</ft:buttonPanel>
+
 <cfelse>
 	<!--- force selection of typename --->
 	<ft:object legend="Collection Creation" lfields="title,collectiontype,collectiontypename" stobject="#stObj#" format="edit" intable="false" />
 
-	<ft:farcryButtonPanel indentForLabel="false">
+	<ft:buttonPanel indentForLabel="false">
 		<ft:button value="Create Collection" /> 
-		<ft:button value="Cancel" />
-	</ft:farcryButtonPanel>
+		<ft:button value="Cancel" validate="false" />
+	</ft:buttonPanel>
 
 </cfif>
 </ft:form>

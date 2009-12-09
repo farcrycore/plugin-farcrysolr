@@ -5,9 +5,9 @@
 
 <ft:form>
 	<ft:object objectid="#stobj.objectid#" typename="farsolrSearch" lExcludeFields="label,bSearchPerformed" IncludeFieldSet="false"  />
-	<ft:farcryButtonPanel>
+	<ft:buttonPanel>
 		<ft:button value="Search" />
-	</ft:farcryButtonPanel>
+	</ft:buttonPanel>
 </ft:form>
 
 <cfsetting enablecfoutputonly="false" />

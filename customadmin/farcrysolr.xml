@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <webtop>
 	<section mergeType="merge" id="admin">
-		<subsection mergeType="merge" id="farcrysolrsubSection" label="solr Plugin" labelType="value">
+		<subsection mergeType="merge" id="farcrysolrsubSection" label="Solr Search Services" labelType="value">
 
 			<menu mergeType="merge" sequence="10" id="farcrysolrmenu" label="Search Settings" labelType="value">
 				<menuitem mergeType="merge" id="farcrysolrmenuitem02" label="Local Collections" link="/admin/customadmin.cfm?module=customlists/farsolrcollection.cfm&amp;plugin=farcrysolr" />

@@ -10,7 +10,9 @@
 		
 		<cfset var lResult = ":All Content" />
 		<cfset var i = "" />
-		<cfset var aAllCollections = application.stPlugins.farcrysolr.osolrConfig.getCollectionArray() />
+		
+		<cfset var oSolrConfig = createObject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig") />
+		<cfset var aAllCollections = oSolrConfig.getCollectionArray() />
 		
 		<cfloop index="i" from="1" to="#arrayLen(aAllCollections)#">
 			<cfset lResult = listAppend(lResult, "#aAllCollections[i].collectionname#:#aAllCollections[i].title#") />

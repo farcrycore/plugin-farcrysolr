@@ -1,6 +1,6 @@
-<cfsetting enablecfoutputonly="true">
-<!--- @@Copyright: Daemon Pty Limited 1995-2007, http://www.daemon.com.au --->
-<!--- @@License: Released Under the "Common Public License 1.0", http://www.opensource.org/licenses/cpl.php --->
+<cfsetting enablecfoutputonly="true" />
+<!--- @@Copyright: Daemon Pty Limited 2002-2009, http://www.daemon.com.au --->
+<!--- @@License:  --->
 <!--- @@displayname: Displays results found --->
 <!--- @@description:   --->
 <!--- @@author: Matthew Bryant (mbryant@daemon.com.au) --->
@@ -21,22 +21,14 @@ START WEBSKIN
  ------------------>
 
 <!--- display search results --->
-<ft:pagination 
+<skin:pagination 
 	paginationID="#stobj.objectid#"
 	qRecordSet="#stParam.qResults#"
 	pageLinks="5"
 	recordsPerPage="25" 
-	Top="true" 
-	Bottom="true"
 	submissionType="form"
-	renderType="inline"
-	bShowPageDropdown="false"
+	r_stobject="st"
 	>
-
-	
-	<!--- Loop through the page to get all the results --->
-	<ft:paginateLoop r_stObject="st" bTypeAdmin="false">		
-
 		<skin:view 
 			typename="#st.custom1#" 
 			objectid="#st.objectid#" 
@@ -49,7 +41,6 @@ START WEBSKIN
 			summary="#st.summary#"		
 			 >
 
-	</ft:paginateLoop>
-</ft:pagination>
+</skin:pagination>
 			
-<cfsetting enablecfoutputonly="false">
+<cfsetting enablecfoutputonly="false" />

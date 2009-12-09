@@ -1,16 +1,6 @@
-<!--- 
-|| LEGAL ||
-$Copyright: Daemon Pty Limited 1995-2007, http://www.daemon.com.au $
-$License: Released Under the "Common Public License 1.0", http://www.opensource.org/licenses/cpl.php$
-
-|| DESCRIPTION || 
-$Description: solrService Component 
-Maintenance object for physical solr collections
-$
-
-|| DEVELOPER ||
-$Developer: Geoff Bowers (modius@daemon.com.au) $
---->
+<!--- @@Copyright: Daemon Pty Limited 2002-2009, http://www.daemon.com.au --->
+<!--- @@License:  --->
+<!--- @@Description: solrService Component; Maintenance object for physical solr collections --->
 <cfcomponent displayname="solr Maintenance" hint="Maintenance object for physical solr collections.">
 
 <cffunction name="init">
@@ -21,23 +11,11 @@ $Developer: Geoff Bowers (modius@daemon.com.au) $
 	
 	<!--- server specific collection path set in plugin constant scope --->
 	<cfif NOT len(arguments.path)>
-		<cfset variables.path = application.stplugins.farcrysolr.osolrConfig.getStoragePath() />
+		<cfset variables.path = application.fapi.getConfig("Solr", "pathStorage") />
 	<cfelse>
 		<cfset variables.path = arguments.path />
 	</cfif>	
 	
-	<!--- backward compatability; collection storage path --->
-	<cfif NOT len(variables.path)>
-		<cfif structkeyexists(application.path, "solrStoragePath")>
-		<!--- deprecated; server specific collection path set in ./config/_serverSpecificVars.cfm --->
-			<cfset variables.path = application.path.solrStoragePath />
-		
-		<cfelseif isDefined("application.config.general.solrStoragePath")>
-		<!--- deprecated; collection set in general config --->
-			<cfset variables.path = application.config.general.solrStoragePath />
-		</cfif>
-	</cfif>
-
 	<cfif NOT len(variables.path)>
 	<!--- can't determine a proper path --->
 		<cfthrow type="Application" errorcode="plugins.farcrysolr.solrService" message="Collection path not defined." detail="A collection path for solr collections must be defined to use the solr plugin." />
@@ -451,7 +429,7 @@ Gateway
 <cffunction name="getCollectionQuery" access="private" returntype="query" output="false" hint="Get all the collections registered for this coldfusion instance, filtered for the application name.">
 	<cfset var qReturn=queryNew("CATEGORIES, CHARSET, CREATED, DOCCOUNT, LASTMODIFIED, MAPPED, NAME, ONLINE, PATH, REGISTERED, SIZE") />
 	
-	<cfcollection action="list" name="qReturn" />
+	<cfcollection action="list" name="qReturn" engine="solr" />
 	
 	<!--- filter for the active application name --->
 	<cfquery dbtype="query" name="qReturn">
@@ -477,7 +455,7 @@ Collection Maintenance
 	<cfset stresult.path=variables.path />
 	
 	<cftry>
-		<cfcollection action="create" collection="#arguments.collection#" path="#variables.path#" categories="true" />
+		<cfcollection action="create" collection="#arguments.collection#" path="#variables.path#" categories="true" engine="solr" />
 		<cfcatch>
 			<cfset stResult.bsuccess="false" />
 			<cfset stResult.message=cfcatch.Message />
@@ -540,8 +518,10 @@ Collection Maintenance
 		<cfset var qResults = queryNew("init") />
 		<cfset var oSearchForm = createObject("component", application.stcoapi["#arguments.typename#"].packagePath) />
 		<cfset var stSearchForm = oSearchForm.getData(objectid="#arguments.objectid#") />
-		<cfset var lAllCollections = application.stPlugins.farcrysolr.osolrConfig.getCollectionList() />
-		<cfset var aAllCollections = application.stPlugins.farcrysolr.osolrConfig.getCollectionArray() />
+
+		<cfset var oSolrConfig = createObject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
+		<cfset var lAllCollections = oSolrConfig.getCollectionList() />
+		<cfset var aAllCollections = oSolrConfig.getCollectionArray() />
 		<cfset var lCollectionsToSearch = "" />
 		<cfset var searchCriteria = "" />
 		
@@ -567,7 +547,7 @@ Collection Maintenance
 		<!--- SETUP THE RESULTS --->
 		<cfif stResult.bSearchPerformed AND listLen(stResult.lCollectionsToSearch)>
 			
-			<cfsearch collection="#stResult.lCollectionsToSearch#" criteria="#stResult.searchCriteria#" name="stResult.qResults" maxrows="#arguments.maxrows#" suggestions="#arguments.suggestions#" status="stResult.stQueryStatus" type="internet" />
+			<cfsearch collection="#stResult.lCollectionsToSearch#" criteria="#stResult.searchCriteria#" name="stResult.qResults" maxrows="#arguments.maxrows#" suggestions="#arguments.suggestions#" status="stResult.stQueryStatus" />
 		
 			<solr:searchLog status="#stResult.stQueryStatus#" type="internet" lcollections="#lCollectionsToSearch#" criteria="#stResult.searchCriteria#" />
 			

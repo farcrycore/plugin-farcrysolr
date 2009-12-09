@@ -29,7 +29,7 @@
 </cfif>
 
 <!--- set up solr service --->
-<cfif NOT structkeyExists(application.stplugins.farcrysolr, "oSolrConfig")>
+<!--- <cfif NOT structkeyExists(application.stplugins.farcrysolr, "oSolrConfig")>
 	<cftry>
 		<cfset application.stplugins.farcrysolr.osolrConfig=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
 		<cfcatch type="any">
@@ -39,18 +39,18 @@
 			<cfset pluginLoaded=false />
 		</cfcatch>
 	</cftry>
-</cfif>
+</cfif> --->
 
 <!--- continue only if plugin config correct --->
 <cfif pluginLoaded>
-	<!--- set solr collection storage path --->
+	<!--- <!--- set solr collection storage path --->
 	<cfif NOT structkeyExists(application.stplugins.farcrysolr, "storagePath")>
 		<!--- set default storage path --->
 		<cfset application.stplugins.farcrysolr.osolrConfig.setStoragePath(storagePath="C:\coldfusionsolr\collections") />
 	<cfelse>
 		<!--- set custom storage path --->
 		<cfset application.stplugins.farcrysolr.osolrConfig.setStoragePath(storagePath=application.stplugins.farcrysolr.storagePath) />
-	</cfif>
+	</cfif> --->
 	
 	<!--- set supported hosts --->
 	<cfif NOT structkeyExists(application.stplugins.farcrysolr, "lhosts")>
