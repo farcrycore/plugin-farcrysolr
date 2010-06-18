@@ -20,9 +20,11 @@
 <cfif structKeyExists(url, "criteria") and len(url.criteria)>
 	<cfset form.criteria = url.criteria />
 </cfif>
+
 <cfif structKeyExists(url, "lCollections") and len(url.lCollections)>
 	<cfset form.lCollections = url.lCollections />
 </cfif>
+
 <cfif structKeyExists(form, "criteria") and len(form.criteria)>
 	<cfset stProperties = structNew() />
 	<cfset stProperties.objectid = stObj.objectid />

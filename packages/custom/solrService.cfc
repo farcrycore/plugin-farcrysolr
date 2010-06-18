@@ -11,7 +11,7 @@
 	
 	<!--- server specific collection path set in plugin constant scope --->
 	<cfif NOT len(arguments.path)>
-		<cfset variables.path = application.fapi.getConfig("Solr", "pathStorage") />
+		<cfset variables.path = application.fapi.getConfig("configSolrSearch", "pathStorage") />
 	<cfelse>
 		<cfset variables.path = arguments.path />
 	</cfif>	
@@ -544,23 +544,31 @@ Collection Maintenance
 			<cfset stResult.bSearchPerformed = false />
 		</cfif>
 
+		
 		<!--- SETUP THE RESULTS --->
 		<cfif stResult.bSearchPerformed AND listLen(stResult.lCollectionsToSearch)>
 			
-			<cfsearch collection="#stResult.lCollectionsToSearch#" criteria="#stResult.searchCriteria#" name="stResult.qResults" maxrows="#arguments.maxrows#" suggestions="#arguments.suggestions#" status="stResult.stQueryStatus" />
-		
-			<solr:searchLog status="#stResult.stQueryStatus#" type="internet" lcollections="#lCollectionsToSearch#" criteria="#stResult.searchCriteria#" />
+			<cfsearch collection="#stResult.lCollectionsToSearch#" 
+					  criteria="#stResult.searchCriteria#" 
+					  name="stResult.qResults" 
+					  maxrows="#arguments.maxrows#" 
+					  suggestions="#arguments.suggestions#" 
+					  status="stResult.stQueryStatus" />
+			
+			<solr:searchLog status="#stResult.stQueryStatus#" type="internet" 
+							lcollections="#lCollectionsToSearch#" 
+							criteria="#stResult.searchCriteria#" />
 			
 			<cfquery dbtype="query" name="stResult.qResults">
-			SELECT *, custom2 AS objectid
-			FROM stResult.qResults
-			WHERE category = 'file'
-			
-			UNION
-			
-			SELECT *, [key] AS objectid
-			FROM stResult.qResults
-			WHERE category <> 'file'			
+				SELECT *, custom2 AS objectid
+				FROM stResult.qResults
+				WHERE category = 'file'
+				
+				UNION
+				
+				SELECT *, [key] AS objectid
+				FROM stResult.qResults
+				WHERE category <> 'file'
 			</cfquery>	
 			
 			<!--- Sort the results --->

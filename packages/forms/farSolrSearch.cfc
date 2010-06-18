@@ -1,3 +1,16 @@
+<!--- 
+|| LEGAL ||
+$Copyright: Daemon Pty Limited 1995-2007, http://www.daemon.com.au $
+$License: Released Under the "Common Public License 1.0", http://www.opensource.org/licenses/cpl.php$
+
+|| DESCRIPTION || 
+$Description: farsolrSearch
+object for solr Search
+$
+
+|| DEVELOPER ||
+$Developer: Geoff Bowers (modius@daemon.com.au) $
+--->
 <cfcomponent displayname="Search Form" hint="The search form for searching through the solr index" extends="farcry.core.packages.forms.forms" output="false">
 	<cfproperty ftSeq="1" ftFieldset="General" name="criteria" type="string" default="" hint="The search text criteria" ftLabel="Search" ftClass="solr-search-criteria" />
 	<cfproperty ftSeq="2" ftFieldset="General" name="operator" type="string" default="" hint="The operator used for the search" ftLabel="Search Operator" ftType="list" ftList="any:Any of these words,all:All of these words,phrase:These words as a phrase" />

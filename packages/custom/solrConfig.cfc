@@ -12,7 +12,8 @@
 	<cfset variables.hostname=createObject("java", "java.net.InetAddress").localhost.getHostName() />
 
 	<cffunction name="init" access="public" output="false" returntype="solrConfig">
-		<cfargument name="storagePath" required="false" default="#application.fapi.getConfig("Solr", "pathStorage")#" type="string">
+		<cfargument name="storagePath" required="false" 
+					default="#application.fapi.getConfig("configSolrSearch", "pathStorage")#" type="string">
 		
 		<cfset variables.storagePath = variables.storagePath />
 		<cfset setCollectionArray() />

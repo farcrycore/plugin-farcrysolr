@@ -16,7 +16,7 @@ VIEW
 <admin:header title="solr Collections" />
 
 <ft:objectadmin 
-	typename="farsolrCollection"
+	typename="farSolrCollection"
 	permissionset="news"
 	title="solr Collections: All Hosts"
 	columnList="title,collectiontypename,hostname,builttodate,lIndexProperties,benablesearch,collectiontype"

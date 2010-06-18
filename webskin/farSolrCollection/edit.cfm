@@ -18,7 +18,7 @@ ACTION:
 
 		<cfquery name="qCheckCollectionName" datasource="#application.dsn#">
 		SELECT objectid, label
-		FROM farsolrCollection
+		FROM farSolrCollection
 		WHERE
 			collectionname = '#stprops.collectionname#'
 			AND objectid <> '#stprops.objectid#'
@@ -47,7 +47,7 @@ ACTION:
 	<!--- synchronise the settings for other members of lhosts --->
 	<cfif len(application.stplugins.farcrysolr.lhosts)>
 		<cfquery datasource="#application.dsn#" name="qConfigs">
-		SELECT objectid FROM farsolrCollection
+		SELECT objectid FROM farSolrCollection
 		WHERE
 			collectionname = '#stobj.collectionname#'
 			AND objectid <> '#stobj.objectid#'

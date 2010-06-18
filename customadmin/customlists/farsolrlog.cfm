@@ -19,7 +19,7 @@ VIEW
 <admin:header title="solr Search Log" />
 
 <ft:objectadmin 
-	typename="farsolrLog"
+	typename="farSolrLog"
 	permissionset="news"
 	title="solr Search Log"
 	columnList="criteria,lcollections,results,datetimecreated"
