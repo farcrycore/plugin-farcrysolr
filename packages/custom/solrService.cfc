@@ -556,7 +556,7 @@ Collection Maintenance
 					  status="stResult.stQueryStatus" />
 			
 			<solr:searchLog status="#stResult.stQueryStatus#" type="internet" 
-							lcollections="#lCollectionsToSearch#" 
+							lcollections="#stResult.lCollectionsToSearch#" 
 							criteria="#stResult.searchCriteria#" />
 			
 			<cfquery dbtype="query" name="stResult.qResults">
