@@ -29,9 +29,9 @@
 </cfif>
 
 <!--- set up solr service --->
-<!--- <cfif NOT structkeyExists(application.stplugins.farcrysolr, "oSolrConfig")>
+<cfif NOT structkeyExists(application.stplugins.farcrysolr, "oSolrConfig")>
 	<cftry>
-		<cfset application.stplugins.farcrysolr.osolrConfig=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
+		<cfset application.stplugins.farcrysolr.oSolrConfig=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
 		<cfcatch type="any">
 			<!--- warn that plugin is not installed.. but don't blow up --->
 			<cftrace type="warning" text="Problem initialising farcrysolr plugin. Confirm types have been deployed." />
@@ -39,23 +39,16 @@
 			<cfset pluginLoaded=false />
 		</cfcatch>
 	</cftry>
-</cfif> --->
+</cfif>
 
 <!--- continue only if plugin config correct --->
 <cfif pluginLoaded>
-	<!--- <!--- set solr collection storage path --->
-	<cfif NOT structkeyExists(application.stplugins.farcrysolr, "storagePath")>
-		<!--- set default storage path --->
-		<cfset application.stplugins.farcrysolr.osolrConfig.setStoragePath(storagePath="C:\coldfusionsolr\collections") />
-	<cfelse>
-		<!--- set custom storage path --->
-		<cfset application.stplugins.farcrysolr.osolrConfig.setStoragePath(storagePath=application.stplugins.farcrysolr.storagePath) />
-	</cfif> --->
 	
 	<!--- set supported hosts --->
 	<cfif NOT structkeyExists(application.stplugins.farcrysolr, "lhosts")>
 		<!--- set default host --->
 		<cfset application.stplugins.farcrysolr.lhosts = createObject("java", "java.net.InetAddress").localhost.getHostName() />
 	</cfif>
+	
 </cfif>
 <cfsetting enablecfoutputonly="false" />
