@@ -94,7 +94,7 @@
 --->
 	
 	<!--- ALLOW THE DEVELOPER TO CREATE A CUSTOM QUERY FOR THE CONTENT THEY WANT TO INDEX --->
-	<cfset oType = createObject("component", application.stcoapi["#arguments.config.collectiontypename#"].packagePath) />
+	<cfset oType = application.fapi.getContentType(arguments.config.collectiontypename) />
 	<cfif structKeyExists(oType,"#arguments.config.contentToIndexFunction#")>
 		<cfinvoke component="#oType#" method="#arguments.config.contentToIndexFunction#" returnvariable="qContentToIndex">
 			<cfinvokeargument name="config" value="#arguments.config#">
@@ -141,7 +141,7 @@
 	</cfquery>
 
 	<cfif listlen(arguments.config.CATCOLLECTION)>
-		<cfset oCat = createObject("component", "farcry.core.packages.types.category") />
+		<cfset oCat = application.fapi.getContentType("category") />
 		<cfset qCat = oCat.getDataQuery(lCategoryIDs="#arguments.config.CATCOLLECTION#"
 			,typename="#arguments.config.collectiontypename#"
 			,bMatchAll="0"
@@ -366,7 +366,7 @@
 	</cfif> --->
 	<!--- update builttodate if successful --->
 	<cfif stResult.bSuccess AND structkeyexists(arguments.config, "objectid") and qUpdates.recordcount>
-		<cfset osolrCollection=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection") />
+		<cfset osolrCollection=application.fapi.getContentType("farSolrCollection") />
 		<cfset stConfigProps=osolrCollection.getData(objectid=arguments.config.objectid) />
 		<cfset stConfigProps.builttodate = qUpdates.datetimelastupdated[qUpdates.recordcount] />
 		<cfset stresult.builttodate = stConfigProps.builttodate />
@@ -516,10 +516,10 @@ Collection Maintenance
 		
 		<cfset var stResult = structNew() />
 		<cfset var qResults = queryNew("init") />
-		<cfset var oSearchForm = createObject("component", application.stcoapi["#arguments.typename#"].packagePath) />
+		<cfset var oSearchForm = application.fapi.getContentType(arguments.typename) />
 		<cfset var stSearchForm = oSearchForm.getData(objectid="#arguments.objectid#") />
 
-		<cfset var oSolrConfig = createObject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
+		<cfset var oSolrConfig = application.stplugins.farcrysolr.oSolrConfig />
 		<cfset var lAllCollections = oSolrConfig.getCollectionList() />
 		<cfset var aAllCollections = oSolrConfig.getCollectionArray() />
 		<cfset var lCollectionsToSearch = "" />

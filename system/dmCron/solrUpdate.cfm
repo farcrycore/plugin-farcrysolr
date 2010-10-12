@@ -7,9 +7,9 @@
 	where	hostname = '#lcase(application.sysinfo.machinename)#'
 </cfquery>
 
-<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+<cfset osolr=application.stplugins.farcrysolr.oSolrService />
 <cfloop query="qCollections">
-	<cfset stConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection").getData(objectid=qCollections.objectid[currentrow]) />
+	<cfset stConfig=application.fapi.getContentType("farsolrCollection").getData(objectid=qCollections.objectid[currentrow]) />
 	<cfset stresult=osolr.update(config=stconfig) />
 	<cfoutput>
 		#stResult.message#<br/>

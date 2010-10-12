@@ -63,7 +63,7 @@ afterSave(); synch with other host collections
 	
 	<cfset var stobj=getData(objectid=arguments.objectid) />
 	<cfset var stReturn=structNew() />
-	<cfset var osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+	<cfset var osolr=application.stplugins.farcrysolr.oSolrService />
 	
 	<cfset stReturn=super.delete(objectid=stobj.objectid, auditNote="Deleted configuration and associated collection for #stobj.collectionname#.")>
 	
@@ -87,7 +87,7 @@ afterSave(); synch with other host collections
 	
 	
 	<cfif len(stobj.collectiontypename)>
-		<cfset o = createObject("component", application.stcoapi["#stobj.collectiontypename#"].packagePath) />
+		<cfset o = application.fapi.getContentType(stobj.collectiontypename) />
 		<!--- ADD DEFAULT FIRST GETTING THE DISPLAY NAME --->
 		<cfif structKeyExists(o, "contentToIndex")>
 			<cfif structKeyExists(o['contentToIndex'].metadata, "displayName")>

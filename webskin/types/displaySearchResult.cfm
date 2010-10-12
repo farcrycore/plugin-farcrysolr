@@ -22,7 +22,7 @@
 </cfif>
 
 <!--- Initialize the Search Service --->
-<cfset oSearchService=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+<cfset oSearchService=application.stplugins.farcrysolr.oSolrService />
 
 <!--- FORMAT THE SUMMARY --->
 <cfset summary = oSearchService.stripHTML(summary) />

@@ -57,7 +57,7 @@
 	action="#actionURL#">
 
 	<!--- Get the search Results --->
-	<cfset oSearchService=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+	<cfset oSearchService=application.stplugins.farcrysolr.oSolrService />
 	<cfset stSearchResult = oSearchService.getSearchResults(objectid="#stobj.objectid#", typename="#stobj.typename#") />
 	
 	<skin:view typename="#stobj.typename#" objectid="#stobj.objectid#" webskin="displaySearchForm" />

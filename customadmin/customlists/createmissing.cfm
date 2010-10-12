@@ -8,7 +8,7 @@ ENVIRONMENT
 
 <cfset qMissing=queryNew("objectid,collectionname,title,collectiontypename") />
 
-<cfset osolr=createObject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+<cfset osolr=application.stplugins.farcrysolr.oSolrService />
 <cfset qCollections=osolr.getCollections() />
 
 <cfquery datasource="#application.dsn#" name="qHostConfigs">
@@ -49,8 +49,8 @@ ACTION
 
 		<cfoutput><h3>Create solr Collections</h3></cfoutput>
 		
-		<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
-		<cfset ofvc=createObject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection") />
+		<cfset osolr=application.stplugins.farcrysolr.oSolrService />
+		<cfset ofvc=application.fapi.getContentType("farSolrCollection") />
 
 		<cfloop query="qMissing">
 			<cfset stConfig=ofvc.getData(objectid=qMissing.objectid) />

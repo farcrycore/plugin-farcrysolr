@@ -1,5 +1,7 @@
 <cfsetting enablecfoutputonly="true" />
 
+<!--- @@cacheStatus: -1 --->
+
 <!--- import tag libraries --->
 <cfimport prefix="ft" taglib="/farcry/core/tags/formtools" />
 
@@ -33,7 +35,7 @@ ACTION:
 			<cfoutput><p><strong>Error</strong>: #qCheckCollectionName.label# already has a collection of the same name.</p></cfoutput>
 			--->
 		<cfelse>
-			<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
+			<cfset osolr=application.stplugins.farcrysolr.oSolrService />
 			<cfset solrResult=osolr.createCollection(collection=stprops.collectionname) />
 			<cfdump var="#solrResult#">
 		</cfif>
@@ -62,7 +64,7 @@ ACTION:
 			<cfset stUpdate.hostname=stConfig.hostname />
 			<cfset stUpdate.collectionpath=stConfig.collectionpath />
 			<!--- <cfset stUpdate.builttodate=stConfig.builttodate /> --->
-			<cfset setData(objectid=qConfigs.objectid, stprops=stUpdate) />
+			<cfset setData(objectid=qConfigs.objectid, stProperties=stUpdate) />
 		</cfloop>
 	</cfif>
 
@@ -97,7 +99,7 @@ VIEW:
 	<cfif listLen(getContentToIndexFunctionList(objectid="#stobj.objectid#")) GT 1>
 		<ft:object legend="Content To Index" lfields="contentToIndexFunction" stobject="#stObj#" format="edit" intable="false" />
 	</cfif>
-	
+
 	<ft:object legend="Advanced Configuration" lfields="custom3,custom4" stobject="#stObj#" format="edit" intable="false" />
 	<ft:object legend="Operational Options" lfields="bEnableSearch,builttodate,collectionname,collectionpath,hostname" stobject="#stObj#" format="edit" intable="false" />
 	<ft:object legend="Debug Options Only" lfields="collectiontype,collectiontypename" stobject="#stObj#" format="edit" intable="false" />

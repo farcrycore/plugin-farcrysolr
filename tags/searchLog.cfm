@@ -40,7 +40,7 @@ else
 	stprops.time=0;
 </cfscript>
 
-<cfset osolrLog=createObject("component", "farcry.plugins.farcrysolr.packages.types.farsolrLog") />
+<cfset osolrLog=application.fapi.getContentType("farSolrLog") />
 <cfset osolrLog.createData(stproperties=stprops, bAudit=false) />
 
 <cfsetting enablecfoutputonly="false" />

@@ -22,7 +22,7 @@ ACTION
 	<cfcase value="Purge Redundant Configs">
 		<cfoutput><h3>Purge Redundant Configs</h3></cfoutput>
 				
-		<cfset ofvc=createObject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection") />
+		<cfset ofvc=application.fapi.getContentType("farSolrCollection") />
 
 		<cfloop query="qPurge">
 			<cfif qPurge.hostname eq application.sysinfo.machinename>

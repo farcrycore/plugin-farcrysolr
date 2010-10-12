@@ -32,6 +32,7 @@
 <cfif NOT structkeyExists(application.stplugins.farcrysolr, "oSolrConfig")>
 	<cftry>
 		<cfset application.stplugins.farcrysolr.oSolrConfig=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig").init() />
+		<cfset application.stplugins.farcrysolr.oSolrService=createobject("component","farcry.plugins.farcrysolr.packages.custom.solrService").init() />
 		<cfcatch type="any">
 			<!--- warn that plugin is not installed.. but don't blow up --->
 			<cftrace type="warning" text="Problem initialising farcrysolr plugin. Confirm types have been deployed." />

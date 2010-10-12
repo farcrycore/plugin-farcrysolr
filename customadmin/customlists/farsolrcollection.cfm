@@ -24,14 +24,14 @@ ENVIRONMENT
 ACTION
 ----------------------------------------->
 <ft:processForm action="create">
-	<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
-	<cfset stConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection").getData(objectid=form.selectedobjectid) />
+	<cfset osolr=application.stplugins.farcrysolr.oSolrService />
+	<cfset stConfig=application.fapi.getContentType("farSolrCollection").getData(objectid=form.selectedobjectid) />
 	<cfset stresult=osolr.createCollection(collection=stconfig.collectionname) />
 	<cfdump var="#stResult.message#" />
 </ft:processForm>
 
 <ft:processForm action="deleteCollection" >
-	<cfset oConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection") />
+	<cfset oConfig=application.fapi.getContentType("farSolrCollection") />
 	<cfloop list="#form.selectedobjectid#" index="id">
 		<cfset stresult=oConfig.delete(objectid=id) />
 		<cfdump var="#stResult.message#" />
@@ -39,22 +39,22 @@ ACTION
 </ft:processForm>
 
 <ft:processForm action="optimize" >
-	<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
-	<cfset stConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection").getData(objectid=form.selectedobjectid) />
+	<cfset osolr=application.stplugins.farcrysolr.oSolrService />
+	<cfset stConfig=application.fapi.getContentType("farSolrCollection").getData(objectid=form.selectedobjectid) />
 	<cfset stresult=osolr.optimizeCollection(collection=stconfig.collectionname) />
 	<cfdump var="#stResult.message#" />
 </ft:processForm>
 
 <ft:processForm action="update" >
-	<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
-	<cfset stConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection").getData(objectid=form.selectedobjectid) />
+	<cfset osolr=application.stplugins.farcrysolr.oSolrService />
+	<cfset stConfig=application.fapi.getContentType("farSolrCollection").getData(objectid=form.selectedobjectid) />
 	<cfset stresult=osolr.update(config=stconfig) />
 	<cfdump var="#stResult.message#" />
 </ft:processForm>
 
 <ft:processForm action="purge" >
-	<cfset osolr=createobject("component", "farcry.plugins.farcrysolr.packages.custom.solrService").init() />
-	<cfset stConfig=createobject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection").getData(objectid=form.selectedobjectid) />
+	<cfset osolr=application.stplugins.farcrysolr.oSolrService />
+	<cfset stConfig=application.fapi.getContentType("farSolrCollection").getData(objectid=form.selectedobjectid) />
 	<cfset stresult=osolr.purge(collection=stconfig.collectionname) />
 	<cfdump var="#stResult.message#" />
 </ft:processForm>

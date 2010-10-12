@@ -24,7 +24,7 @@ $Developer: Geoff Bowers (modius@daemon.com.au) $
 		<cfset var lResult = ":All Content" />
 		<cfset var i = "" />
 		
-		<cfset var oSolrConfig = createObject("component", "farcry.plugins.farcrysolr.packages.custom.solrConfig") />
+		<cfset var oSolrConfig = application.stplugins.farcrysolr.oSolrConfig />
 		<cfset var aAllCollections = oSolrConfig.getCollectionArray() />
 		
 		<cfloop index="i" from="1" to="#arrayLen(aAllCollections)#">

@@ -32,7 +32,7 @@ ACTION
 			<cfoutput><p>This host has no collection configs to synchronise.</p></cfoutput>
 		</cfif>
 		
-		<cfset ofvc=createObject("component", "farcry.plugins.farcrysolr.packages.types.farsolrCollection") />
+		<cfset ofvc=application.fapi.getContentType("farSolrCollection") />
 		
 		<cfloop query="qHostConfigs">
 	
