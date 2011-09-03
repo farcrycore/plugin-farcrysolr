@@ -104,6 +104,9 @@
 		<cfquery name="qContentToIndex" datasource="#application.dsn#">
 		SELECT objectID
 		FROM #arguments.config.collectiontypename#
+		<cfif structkeyexists(application.stcoapi[arguments.config.collectiontypename].stprops, "status")>
+		where status = 'approved'
+		</cfif>
 		</cfquery>
 	</cfif>
 
@@ -185,7 +188,7 @@
 
 	
 	<!--- if no results, return immediately --->
-	<cfif NOT qUpdates.recordcount AND NOT qSentToDraft.recordcount AND NOT qDeleted.recordcount>
+	<!---<cfif NOT qUpdates.recordcount AND NOT qSentToDraft.recordcount AND NOT qDeleted.recordcount>
 		<cfset stResult.bsuccess="true" />
 		<cfset stResult.message= arguments.config.collectionname & " had no records to update." />
 		<!--- todo: remove, debug only --->
@@ -194,12 +197,11 @@
 		<cfset stresult.qUpdates = qSentToDraft />
 		<cfset stresult.qUpdates = qDeleted />
 		<cfreturn stresult />
-	</cfif>
+	</cfif>--->
 	
 	
 	<!--- Return ALL objects currently in the collection. To be used by the deleting process. --->
 	<cfsearch collection="#arguments.config.collectionname#" name="qAllCurrentlyIndexed" />
-	
 
 	<cfswitch expression="#arguments.config.collectionType#">
 
