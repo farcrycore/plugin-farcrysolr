@@ -13,7 +13,7 @@ FarCry Solr plugin provides configuration and management services for the ColdFu
 
 Update the plugin list in your project's `./www/farcryConstructor.cfm` file.
 
-``` coldfusion Example ./www/farcryConstructor.cfm
+``` coldfusion
 <!--- FARCRY SPECIFIC --->
 <cfset THIS.locales = "en_AU,en_US" />
 <cfset THIS.dsn = "fullasagoog" /> 
@@ -47,11 +47,8 @@ For example, within an extended `./myproject/packages/types/dmNews.cfc`
 
 ``` coldfusion
 <cffunction name="contentToIndex" returntype="query" description="Gets news content to index">
- 
   <cfset qContentToIndex = application.fapi.getContentObjects(typename="dmNews",lProperties="objectid",publishDate_lte=now(),expiryDate_gt=now()) /> 
- 
   <cfreturn qContentToIndex>
- 
 </cffunction>
 ```
 
