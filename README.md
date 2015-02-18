@@ -1,11 +1,11 @@
 # Plugin: FarCry SOLR
 
-> **Use FarCry Solr Pro Instead**
-> The FarCry Solr Pro plugin http://jeffcoughlin.github.com/farcrysolrpro/ is now available under the Apache open source license and offers a wonderful range of search options that greatly exceed this plugin's capability. Well worth a look if you are looking for an awesome search solution and have the ability to set up a separate Solr service on your server.
+> **DEPRECATED: Use FarCry SOLR Pro Instead**
+> The FarCry SOLR Pro plugin http://jeffcoughlin.github.com/farcrysolrpro/ is now available under the Apache open source license and offers a wonderful range of search options that greatly exceed this plugin's capability. Well worth a look if you are looking for an awesome search solution and have the ability to set up a separate SOLR service on your server.
 
-FarCry Solr plugin provides configuration and management services for the ColdFusion implementation of Solr search service. FarCry Solr allows you to set up a specific collection for each content type, defining exactly which properties should be searchable. In addition, there are features to allow multiple servers in a cluster manage their own collections, replicating/synchronising the verity configurations. Sample search code is provided, although many users will want to develop their own search interfaces. The plugin also provides logging and reporting of search activity.
+FarCry Solr plugin provides configuration and management services for the embedded ColdFusion implementation of Solr search service. FarCry Solr allows you to set up a specific collection for each content type, defining exactly which properties should be searchable. In addition, there are features to allow multiple servers in a cluster manage their own collections, replicating/synchronising the verity configurations. Sample search code is provided, although many users will want to develop their own search interfaces. The plugin also provides logging and reporting of search activity.
 
-**FarCry Verity Solr requires a minimum of FarCry v6.x to function.**
+**FarCry SOLR requires a minimum of FarCry v6.x to function.**
 
 ## Installation
 
